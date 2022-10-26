@@ -1,4 +1,4 @@
-name = "SpawnACU"
+name = "Spawn ACU at start positions"
 uid = "fspaw274-v001-55b4-92b6-64398e7ge43f"
 version = 1
 copyright = "MIT License"

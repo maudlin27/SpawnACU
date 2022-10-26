@@ -5,10 +5,23 @@
 ---
 function TransferACU(oOriginalBrain)
     WaitSeconds(4)
-    for iBrain, oBrain in tArmyBrains do
-        if IsAlly(oOriginalBrain:GetArmyIndex(), oBrain:GetArmyIndex()) then
-            import('/lua/SimUtils.lua').TransferUnitsOwnership(oOriginalBrain:GetListOfUnits(categories.COMMAND, false, true), oBrain:GetArmyIndex(), false)
-            LOG('TransferACU: Given order to transfer ownership of all units owned by brain '..oOriginalBrain.Nickname..' to '..oBrain.Nickname)
+    LOG('Finished waiting, will try and transfer')
+    for iBrain, oBrain in ArmyBrains do
+        if not(oBrain == oOriginalBrain) and IsAlly(oOriginalBrain:GetArmyIndex(), oBrain:GetArmyIndex()) and oBrain.BrainType == 'Human' then
+            LOG('Repru of oBrain='..repru(oBrain)..'; repr of oOriginalBrain='..repru(oOriginalBrain))
+            local tUnitsToTransfer = oOriginalBrain:GetListOfUnits(categories.COMMAND, false, true)
+            if tUnitsToTransfer then
+                for iUnit, oUnit in tUnitsToTransfer do
+                    LOG('iUnit='..iUnit..'; oUnit='..oUnit.UnitId)
+                    local tSpawnLocation = {oUnit:GetPosition()[1], oUnit:GetPosition()[2], oUnit:GetPosition()[3]}
+                    local sSpawnID = oUnit.UnitId
+                    oUnit:Destroy()
+                    local oNewUnit = CreateUnit(sSpawnID, oBrain.Army, tSpawnLocation[1], tSpawnLocation[2], tSpawnLocation[3], 0, 0, 0, 0, 'Land')
+                    LOG('Attempted to create unit with sSpawnID='..sSpawnID..' for army '..oBrain.Army..' at location '..repru(tSpawnLocation))
+                end
+            else
+                LOG('No units to transfer')
+            end
         end
     end
 end

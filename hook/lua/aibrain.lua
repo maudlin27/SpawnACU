@@ -1,18 +1,17 @@
--- 2021-07-09: Base aiBrain is 4057 without UVESO, 4449 lines long with?
 local SpawnMain = import('/mods/SpawnACU/lua/SpawnMain.lua')
 
 SpawnACUAIBrainClass = AIBrain
 AIBrain = Class(SpawnACUAIBrainClass) {
 
-    OnDefeat = function(self)
+    --[[OnDefeat = function(self)
         ForkThread(M27Events.OnPlayerDefeated, self)
         SpawnACUAIBrainClass.OnDefeat(self)
-    end,
-
-    -- Hook m27AI and record it as being used
+    end,--]]
 
     OnCreateAI = function(self, planName)
-        if string.find(ScenarioInfo.ArmySetup[self.Name].AIPersonality, 'SpawnACU') then
+        LOG('OnCreateAI hook for ai with personality '..ScenarioInfo.ArmySetup[self.Name].AIPersonality)
+        if ScenarioInfo.ArmySetup[self.Name].AIPersonality == 'spawnacu' then
+            LOG('Forked transfer ACU')
             ForkThread(SpawnMain.TransferACU, self)
             --SpawnACUAIBrainClass.OnCreateAI(self, planName)
 

@@ -42,6 +42,8 @@ function IssueMove(tUnits, tTarget)
 end--]]
 
 --Approach of hooking to get around adaptive map issues is based on Softels DilliDalli AI - alternative is using CanBuildStructureAt to check, but that runs into issues if the resource point has reclaim on it
+--]]
+--[[
 local M27CreateResourceDeposit = CreateResourceDeposit
 CreateResourceDeposit = function(t,x,y,z,size)
     M27MapInfo.RecordResourcePoint(t,x,y,z,size)

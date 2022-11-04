@@ -1,8 +1,8 @@
 name = "Spawn ACU at start positions"
-uid = "fspaw274-v001-55b4-92b6-64398e7ge43f"
-version = 1
+uid = "fspaw274-v002-55b4-92b6-64398e7ge43f"
+version = 2
 copyright = "MIT License"
-description = "Allows you to spawn a controllable ACU at specified start positions.  To use, select the Spawn ACU AI in the relevant start positions, and at the start of the game the AI's ACU will be transferred over to a human player on the same team"
+description = "Allows you to spawn a controllable ACU at specified start positions.  To use, select the Spawn ACU AI in the relevant start positions, and at the start of the game the AI's ACU will be transferred over to a human player on the same team. V2-Campaign bugfix"
 author = "maudlin27"
 url = ""
 icon = "/mods/SpawnACU/ACUIcon.jpg"

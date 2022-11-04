@@ -13,6 +13,9 @@ AIBrain = Class(SpawnACUAIBrainClass) {
         if ScenarioInfo.ArmySetup[self.Name].AIPersonality == 'spawnacu' then
             LOG('Forked transfer ACU')
             ForkThread(SpawnMain.TransferACU, self)
+            self:CreateBrainShared(planName)
+            --self:InitializeEconomyState()
+            self.BrainType = 'AI'
             --SpawnACUAIBrainClass.OnCreateAI(self, planName)
 
         else
